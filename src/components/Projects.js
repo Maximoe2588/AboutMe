@@ -7,7 +7,7 @@ const Projects = () => {
   useEffect(() => {
     const fetchRepositories = async () => {
       try {
-        const accessToken = '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';
+        const accessToken = process.env.REACT_APP_GITHUB_TOKEN;
 
         const response = await axios.get('https://api.github.com/users/Maximoe2588/repos', {
           headers: {
@@ -23,6 +23,7 @@ const Projects = () => {
 
     fetchRepositories();
   }, []);
+  /*
 
   return (
     <section id="projects">
@@ -38,10 +39,25 @@ const Projects = () => {
       </ul>
     </section>
   );
-};
+};*/
 
+return (
+  <section id="projects">
+    <h2>My Projects</h2>
+    <ul>
+      {repositories.map(repo => (
+        <li key={repo.id}>
+          <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
+            {repo.name}
+          </a>
+          : {repo.description} {/* Displaying the repository description */}
+        </li>
+      ))}
+    </ul>
+  </section>
+);
+};
 export default Projects;
 
 
 
-//'Bearer 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'
